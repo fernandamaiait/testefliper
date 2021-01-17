@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:testefliper/design-system/components/divider.widget.dart';
 import 'package:testefliper/design-system/theme/colors.dart';
 
 import '../theme/spacers.dart';
 
 class Card extends StatelessWidget {
   final String title;
-  final Widget titleBarRightAction;
   final Widget body;
-  // final Widget bottom;
+  final Widget titleBarAction;
+  final Widget bottom;
 
-  Card({
-    @required this.title,
-    this.titleBarRightAction,
+  Card(
+    this.title, {
     @required this.body,
-    //   this.bottom,
+    this.titleBarAction,
+    this.bottom,
   });
 
   @override
@@ -22,8 +23,18 @@ class Card extends StatelessWidget {
       margin: EdgeInsets.all(Spacers.sm),
       padding: EdgeInsets.all(Spacers.md),
       decoration: BoxDecoration(
-        color: card,
-        borderRadius: BorderRadius.circular(10.0),
+        color: ThemeColors.defaultBackground,
+        borderRadius: BorderRadius.circular(20.0),
+        boxShadow: [
+          BoxShadow(
+            color: ThemeColors.containerShadow,
+            blurRadius: 1,
+            offset: Offset(
+              1,
+              1,
+            ),
+          )
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -31,7 +42,7 @@ class Card extends StatelessWidget {
           _buildTitle(context),
           Padding(padding: EdgeInsets.only(bottom: Spacers.lg)),
           body,
-          //if (bottom != null) _buildBottom(context),
+          if (bottom != null) _buildBottom(context),
         ],
       ),
     );
@@ -39,20 +50,28 @@ class Card extends StatelessWidget {
 
   _buildTitle(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           title,
           style: Theme.of(context).textTheme.headline5,
         ),
+        titleBarAction,
       ],
     );
   }
 
   _buildBottom(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Divider(),
-        // bottom,
+        SizedBox(height: Spacers.xs),
+        CustomDivider(),
+        SizedBox(height: Spacers.xs),
+        Row(
+          children: [
+            bottom,
+          ],
+        ),
       ],
     );
   }
