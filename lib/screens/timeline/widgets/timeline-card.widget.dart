@@ -5,7 +5,21 @@ import 'package:testefliper/design-system/components/card.widget.dart'
 import 'package:testefliper/design-system/theme/colors.dart';
 import 'package:testefliper/design-system/theme/spacers.dart';
 
-class TimelineCard extends StatelessWidget {
+class TimelineCard extends StatefulWidget {
+  final data;
+
+  TimelineCard(this.data);
+
+  @override
+  _TimelineCardState createState() => _TimelineCardState();
+}
+
+class _TimelineCardState extends State<TimelineCard> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return dsCard.Card(
